@@ -136,13 +136,10 @@
                 <div class="about-text go-to">
                     <h3 class="dark-color">About Me</h3>
                     <h6 class="theme-color lead">{{ request.user }}</h6>
-                    {% for service in services %}
-                        {{service.creator.bio}}
-                    {% endfor %}
                     <div class="row about-list">
                         <div class="col-md-6">
-                            <div class="media">
-                                <label>Birthday</label>
+                            <div class="media" style="font-family: 'Adaptirebuli';">
+                                <label>birthday</label>
                                 <p>3rd January 2001</p>
                             </div>
                             <div class="media">
@@ -165,7 +162,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="about-avatar">
-                    <img src="{{ request.user.avatar.url }}" title="avatar" alt="...">
+                    <img src="{{ request.user.avatar.url }}" title="avatar" width="400px;" height="385px;" alt="...">
                 </div>
             </div>
         </div>
