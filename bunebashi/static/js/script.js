@@ -59,3 +59,17 @@ $(window).on("load", function() {
         }), !1
     })
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Enable Bootstrap's alert dismissal functionality
+    var alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function (alert) {
+        var closeButton = alert.querySelector('.close');
+        if (closeButton) {
+            closeButton.addEventListener('click', function () {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+            });
+        }
+    });
+});

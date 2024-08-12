@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 
-{% block title %} <title>Service Page</title>{% endblock %}
+{% block title %} <title>სერვისები</title>{% endblock %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
 <section id="portfolio" class="section portfolio-section">
     <div class="container">
         <div class="filters">
-            <a href="{{ request.path }}" data-filter=".all" class="active">All</a>
+            <a href="{{ request.path }}" data-filter=".all" class="active">ყველა</a>
             {% for genre in genre %}
             <a href="{{ request.path }}?lookfor={{ genre.name }}">{{ genre }}</a>
             {% endfor %}

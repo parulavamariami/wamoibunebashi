@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 
-{% block title %} <title>Goodbye, Old Friend</title>{% endblock %}
+{% block title %} <title>მშვიდობით</title>{% endblock %}
 
 {% block content %}
 
@@ -12,6 +12,7 @@
     }
     .poem-container {
         padding: 30px;
+        margin:10%;
     }
     .poem-container h1 {
         font-size: 24px;
@@ -66,24 +67,17 @@
             {% csrf_token %}
             <div class="form__group">
                     <div class="poem-container">
-                        <h1>Goodbye, Old Friend</h1>
-                        <p>Oh, dear service, it's time to part,<br>
-                        You’ve done your best, you played your part,<br>
-                        But now you’re just a dusty app,<br>
-                        It's time to give that “Delete” a tap.</p>
+                        <p>მშვიდობიით, უკან მოხედვა ძნელია,<br>
+                        მშვიდობით, სათქმელიც არაფერია!</p>
 
-                        <p>No hard feelings, no sad goodbye,<br>
-                        You’re off to the recycle bin in the sky,<br>
-                        We’ll find something new, something slick,<br>
-                        So long, old friend, you were just a click!</p>
                     </div>
                 <hr>
                 <br>
             </div>
 
             <div class="form__action">
-              <a class="btn btn--dark" href="{% url 'services' %}">Cancel</a>
-              <button class="btn btn--main" type="submit" value="Confirm">Submit</button>
+              <a class="btn btn--dark" href="{% url 'services' %}">გაუქმება</a>
+              <button class="btn btn--main" type="submit" value="Confirm">დადასტურება</button>
             </div>
         </form>
     </div>

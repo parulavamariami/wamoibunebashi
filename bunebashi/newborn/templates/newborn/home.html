@@ -1,19 +1,21 @@
 {% extends 'main.html' %}
 
-{% block title %} <title>Home Page</title>{% endblock %}
+{% block title %} <title>მთავარი</title>{% endblock %}
 
 {% block content %}
 {% load static %}
 
 <header class="header">
-    <img src="{% static 'images/header.jpg' %}" width="100%">
+    <img src="{% static 'images/header_kHNTmwZ.jpg' %}" width="100%">
     <div class="overlay">
-        <h1 class="subtitle">ჩვენ ვართ სივრცე ხალხისთვის. შექმენი უნიკალური სერვისები ჩვენთან ერთად.
-          </h1>
-        <img src="{% static 'images/wamoibunebashi1.png' %}" width= ";" alt="">
+        <br><br>
+        <h1 class="subtitle">შექმენი უნიკალური სერვისები ჩვენთან ერთად.</h1>
+        <img src="{% static 'images/wamoibunebashi1.png' %}" alt="წამოი ბუნებაში!">
         <a href="{% url 'signup' %}"><button type="button" class="btn btn-warning">შემოგვიერთდი</button></a>
     </div>
+
     <div class="shape">
+        <br>
         <svg viewBox="0 0 1500 200">
             <path d="m 0,240 h 1500.4828 v -71.92164 c 0,0 -286.2763,-81.79324 -743.19024,-81.79324 C 300.37862,86.28512 0,168.07836 0,168.07836 Z"/>
         </svg>

@@ -11645,7 +11645,7 @@ textarea.form-control {
 }
 
 .portfolio-section .filters {
-  border: 2px solid #dee2e6;
+  border: 2px solid #f5f8fc;
   border-radius: 100px;
   padding: 2px;
   margin: 0 auto 20px;
@@ -11771,4 +11771,8 @@ textarea.form-control {
 .navbar .dropdown-item:hover {
     background-color: #e9ecef;
     color: #0056b3;
+}
+.alert {
+    z-index: 1050; /* Ensure it's above the navbar */
+    position: relative; /* Ensure proper stacking */
 }

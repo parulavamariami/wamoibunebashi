@@ -12,31 +12,32 @@
                 <ul class="navbar-nav ml-auto">
 
                     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="{% url 'services' %}" method="get">
-                        <input name="lookfor" type="search" class="form-control form-control-dark" placeholder="Search Services" aria-label="Search">
+                        <input name="lookfor" type="search" class="form-control form-control-dark" placeholder="მოძებნე სერვისები" aria-label="Search">
                     </form>
 
-                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'about' %}">About us</a></li>
-                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'services' %}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'contact' %}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'about' %}">ჩვენს შესახებ</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'services' %}">სერვისები</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'contact' %}">კონტაქტი</a></li>
 
                     {% if request.user.is_authenticated %}
 
                         <div class="dropdown">
                             <button class="ml-4 nav-link btn btn-primary btn-sm rounded dropdown-toggle" type="button"
                                     id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile</button>
+                                პროფილი</button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'profile' user.id %}">My profile</a></li>
-                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'add-service' %}">Add Service</a></li>
-                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'update_user' %}">Update Profile</a></li>
-                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'logout' %}">Log out</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'profile' user.id %}">ჩემი პროფილი</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'myservices' %}">ჩემი სერვისები</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'add-service' %}">სერვისების დამატება</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'update_user' %}">რედაქტირება</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'logout' %}">გამოსვლა</a></li>
                             </ul>
                         </div>
 
                     {% else %}
 
-                        <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'login' %}">Log in</a></li>
-                        <li class="nav-item"><a class="ml-4 nav-link btn btn-primary btn-sm rounded" href="{% url 'signup' %}">Sign up</a></li>
+                        <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'login' %}">შესვლა</a></li>
+                        <li class="nav-item"><a class="ml-4 nav-link btn btn-primary btn-sm rounded" href="{% url 'signup' %}">რეგისტრაცია</a></li>
 
                     {% endif %}
                 </ul>

@@ -2,8 +2,8 @@ from .models import Genre, Username
 
 def seeder_func():
 
-    genres = ['Hikes', 'Video', 'Photo', 'Fly', 'Guide']
-    usernames = ['Mariam Parulava']
+    genres = ['ლაშქრობა', 'ფოტო', 'სრიალი']
+    usernames = ['მარიამ ფარულავა']
     for genre in genres:
         if not Genre.objects.filter(name=genre):
             new_genre = Genre(name=genre)

@@ -1,15 +1,14 @@
 {% extends 'main.html' %}
-
-{% block title %} <title>My Services</title>{% endblock %}
+{% load static %}
+{% block title %} <title>ჩემი სერვისები</title>{% endblock %}
 
 {% block content %}
 
-    <br>
-    <div class="object" style="margin-left: 10%;">
-        <h1>My Services</h1>
+<div class="header">
+    <img class="b" src="{% static 'images/header_kHNTmwZ.jpg' %}" width="100%" />
+    <div class="overlay">
+        <h1 class="title">Coming Soon...</h1>
     </div>
-    <hr>
-    <br>
-{% include 'newborn/footer.html' %}
+</div>
 
 {% endblock %}

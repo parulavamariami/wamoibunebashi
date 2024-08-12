@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 
-{% block title %} <title>Add Service</title>{% endblock %}
+{% block title %} <title>სერვისის დამატება</title>{% endblock %}
 
 {% block content %}
 
@@ -98,19 +98,19 @@
         {% csrf_token %}
 
         <div class="form__group">
-          <label>Upload Cover Picture</label>
+          <label>ატვირთე ფოტო</label>
             {{ form.picture }}
             <hr>
 
         </div>
 
         <div class="form__group">
-          <label>Service Title</label>
+          <label>სერვისის სახელი</label>
           {{ form.title }}
         </div>
 
         <div class="form__group">
-                <label for="genres">Type</label>
+                <label for="genres">ტიპი</label>
                 <input required type="text" name="genre" list="type-list" >
                 <datalist id="type-list">
                     {% for genre in genres %}
@@ -123,7 +123,7 @@
 
         </div>
         <div class="form__group">
-                <label for="usernames">Username</label>
+                <label for="usernames">მომხმარებლის სახელი</label>
                 <input required type="text" name="username" list="user-list" >
                 <datalist id="user-list">
                     {% for username in usernames %}
@@ -136,20 +136,20 @@
 
         </div>
         <div class="form__group">
-            <label>Price</label>
+            <label>ფასი</label>
             {{ form.price }}
         </div>
 
         <div class="form__group">
-          <label>Description:</label>
+          <label>აღწერა</label>
           {{ form.description }}
             <hr>
         </div>
 
 
         <div class="form__action">
-          <a class="btn btn--dark" href="{% url 'home' %}">Cancel</a>
-          <button class="btn btn--main" type="submit">Create Service</button>
+          <a class="btn btn--dark" href="{% url 'home' %}">გაუქმება</a>
+          <button class="btn btn--main" type="submit">სერვისის შექმნა</button>
         </div>
     </form>
 </div>

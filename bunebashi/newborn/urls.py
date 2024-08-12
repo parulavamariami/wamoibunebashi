@@ -18,7 +18,7 @@ urlpatterns = [
     path('delete_service/<str:serviceid>', views.delete_service, name='delete'),
     path('update_user/', views.update_user, name='update_user'),
     path('delete_comment/<str:id>', views.delete_comment, name='delete_comment'),
+    path('my_services/', views.myservices, name='myservices')
 
 
 ]
-""" path('profile/<str:userid>/my_services', views.myservices, name='myservices')"""

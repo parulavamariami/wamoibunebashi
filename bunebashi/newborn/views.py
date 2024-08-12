@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Service, User, Genre, Username, Comment
+from .models import Service, User, Genre, Username, Comment, ContactMessage
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import MyUserRegisterForm, ServiceForm, UserForm
+from .forms import MyUserRegisterForm, ServiceForm, UserForm, ContactForm
 from .seeder import seeder_func
 from django.contrib import messages
 
@@ -11,19 +11,41 @@ def home(request):
     return render(request, 'newborn/home.html')
 
 def about(request):
-    heading = 'What About Us?'
+    heading = 'ვინ ვართ?'
     context = {'heading': heading}
     return render(request, 'newborn/about.html', context)
 
 def contact(request):
-    heading = 'Contact Info'
-    context = {'heading': heading}
+    heading = 'კონტაქტის ფორმა'
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            ContactMessage.objects.create(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message
+            )
+
+            messages.success(request, 'თქვენი წერილი წარმატებით გაიგზავნა!')
+
+            return redirect('contact')
+    else:
+        form = ContactForm()
+
+    context = {'heading': heading, 'form': form}
     return render(request, 'newborn/contact.html', context)
 def sservices(request):
     lookfor = request.GET.get("lookfor") if request.GET.get("lookfor") is not None else ''
     services = Service.objects.filter(Q(title__icontains=lookfor) | Q(genre__name__icontains=lookfor))
     services = list(dict.fromkeys(services))
-    heading = 'Services'
+    heading = 'სერვისები'
     seeder_func()
     genre = Genre.objects.all()
     context = {'services': services, 'heading': heading, 'genre': genre}
@@ -33,7 +55,7 @@ def profile(request, userid):
     user = User.objects.get(id=userid)
     services = user.services.all()
     username = request.user
-    heading = f'Welcome back @{username}!'
+    heading = f'სალამი @{username}!'
     context = {'services': services, 'heading': heading}
     return render(request, 'newborn/profile.html', context)
 @login_required(login_url='login')
@@ -46,7 +68,7 @@ def saving(request, userid):
 def remove(request, serviceid):
 
     obj = Service.objects.get(id=serviceid)
-    heading = f'Are you sure you want to remove {obj}?'
+    heading = f'წაიშალოს {obj} შენახული სერვისებიდან?'
     context = {'heading': heading, 'obj': obj}
 
     if request.method == "POST":
@@ -67,7 +89,7 @@ def login_user(request):
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request, 'User does not exist! Try again!')
+            messages.error(request, 'მსგავსი მომხმარებელი ვერ მოძებნა, ცადე მოგვიანებით!')
 
         user = authenticate(request, username=username, password=password)
 
@@ -75,9 +97,9 @@ def login_user(request):
             login(request, user)
             return redirect('profile', request.user.id)
         else:
-            messages.error(request, 'Username or Password is not correct!')
+            messages.error(request, 'მომხმარებლის სახელი ან პაროლი არასწორია!')
 
-    heading = 'Let me in'
+    heading = 'სისტემაში შესვლა'
     context = {'heading': heading}
     return render(request, 'newborn/login.html', context)
 
@@ -88,7 +110,7 @@ def logout_user(request):
 def register_user(request):
 
     form = MyUserRegisterForm()
-    heading = 'Sign Up'
+    heading = 'რეგისტრაცია'
 
     if request.method == 'POST':
         form = MyUserRegisterForm(request.POST)
@@ -99,14 +121,14 @@ def register_user(request):
             login(request, user)
             return redirect('profile', user.id)
         else:
-            messages.error(request, 'Follow The Instructions and create proper user and password...')
+            messages.error(request, 'დაფიქსირდა შეცდომა! მიჰყევი ინსტრუქციას და სწორად შეიყვანე მონაცემები.')
 
     context = {'heading': heading, 'form': form}
 
     return render(request, 'newborn/register.html', context)
 @login_required(login_url='login')
 def add_service(request):
-    heading = 'Add New Service '
+    heading = 'დაამატე ახალი სერვისი '
 
     genres = Genre.objects.all()
     usernames = Username.objects.all()
@@ -124,7 +146,7 @@ def add_service(request):
         form = ServiceForm(request.POST)
 
         new_service = Service(creator=request.user, picture=request.FILES['picture'], title=form.data['title'],
-                              price=form.data['price'],username=username, description=form.data['description'])
+                              price=form.data['price'], username=username, description=form.data['description'])
 
         new_service.save()
         new_service.genre.add(genre)
@@ -135,7 +157,7 @@ def add_service(request):
 
 def see_closer(request, id):
     service = Service.objects.get(id=id)
-    heading = f'See {service}'
+    heading = f' {service}'
     service_comments = service.comment_set.all()  # .order_by('-created')
     if request.method == "POST":
         Comment.objects.create(
@@ -149,7 +171,7 @@ def see_closer(request, id):
 def delete_service(request, serviceid):
 
     obj = Service.objects.get(id=serviceid)
-    heading = f'Delete {obj}?'
+    heading = f'წაიშალოს {obj}?'
     context = {'heading': heading, 'obj': obj}
 
     if request.method == "POST":
@@ -160,7 +182,7 @@ def delete_service(request, serviceid):
 
 @login_required(login_url='login')
 def update_user(request):
-    heading = 'Update Your Profile'
+    heading = 'დაარედაქტირე პროფილის ინფორმაცია'
     user = request.user
     form = UserForm(instance=user)
 
@@ -174,7 +196,7 @@ def update_user(request):
     return render(request, 'newborn/update_user.html', context)
 
 def delete_comment(request, id):
-    heading = 'Damn, delete comment, really?'
+    heading = 'წაიშალოს კომენტარი?'
     comment = Comment.objects.get(id=id)
     service = comment.service
     if request.method == 'POST':
@@ -186,8 +208,5 @@ def delete_comment(request, id):
     context = {'heading': heading, 'obj': comment}
     return render(request, 'newborn/delete.html', context)
 
-"""def myservices(request, userid):
-    registred_users = Service.user.all()
-    print(registred_users)
-
-    return render(request, 'newborn/my_services.html', context)"""
+def myservices(request):
+    return render(request, "newborn/my_services.html")

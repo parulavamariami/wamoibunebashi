@@ -4,7 +4,7 @@
             {% for service in services %}
             <div class="col-md-4" >
                 <div class="card border-0 mb-4">
-                    <img src="{{ service.picture.url }}" class="card-img-top w-100" alt="...">
+                    <img src="{{ service.picture.url }}" class="card-img-top w-100" width="250px" height="235px" alt="...">
                     <div class="card-body">
                         <div class="text-holder">
                             <h5 class="card-title">{{service.title}}</h5>
@@ -13,16 +13,16 @@
                             <p>{{service.description |slice:":70"}}</p>
                             {% if request.user.is_authenticated %}
                                 {% if service in request.user.services.all %}
-                                    <a href="{% url 'remove_service' service.id %}" style="background-color: #4d1f08; color: white;" class="btn">Remove</a>
+                                    <a href="{% url 'remove_service' service.id %}" style="background-color: #4d1f08; color: white;" class="btn">შენახვის მოხსნა</a>
                                 {% else %}
-                                    <a href="{% url 'saving' service.id %}" style="background-color: #5c5939; color: white;" class="btn">Save</a>
+                                    <a href="{% url 'saving' service.id %}" style="background-color: #5c5939; color: white;" class="btn">შენახვა</a>
                                 {% endif %}
 
                                 {% if request.user == service.creator %}
-                                    <a href="{% url 'delete' service.id %}" style="background-color: #6b0616; color: white;" class="btn">Delete</a>
+                                    <a href="{% url 'delete' service.id %}" style="background-color: #6b0616; color: white;" class="btn">სერვისის წაშლა</a>
                                 {% endif %}
                             {% endif %}
-                            <a href="{% url 'see-closer' service.id %}" class="small text-muted">See More..</a>
+                            <a href="{% url 'see-closer' service.id %}" class="small text-muted">დეტალურად</a>
                         </div>
                     </div>
                 </div>
