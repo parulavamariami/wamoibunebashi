@@ -1,0 +1,94 @@
+{% extends 'main.html' %}
+
+{% block title %} <title>Goodbye, Old Friend</title>{% endblock %}
+
+{% block content %}
+
+{% include 'newborn/heading.html' %}
+
+<style>
+    .container{
+        text-align: center;
+    }
+    .poem-container {
+        padding: 30px;
+    }
+    .poem-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .poem-container p {
+        font-size: 18px;
+        margin: 10px 0;
+        line-height: 1.6;
+    }
+    .form__group {
+        margin-bottom: 5px;
+        }
+    .form__group input[type="text"],
+    .form__group textarea,
+    .form__group select {
+        width: 45%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px; /* Rounded corners */
+        box-sizing: border-box;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    /* Add some spacing between form elements */
+    .form__group label {
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+    /* Style the submit button */
+    button[type="submit"] {
+        background-color: #6b0616;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Button hover effect */
+    button[type="submit"]:hover {
+        background-color: #3d040d;
+    }
+
+</style>
+<main class="delete-item layout">
+    <div class="container">
+        <form class="form" method="POST" action="">
+            {% csrf_token %}
+            <div class="form__group">
+                    <div class="poem-container">
+                        <h1>Goodbye, Old Friend</h1>
+                        <p>Oh, dear service, it's time to part,<br>
+                        You’ve done your best, you played your part,<br>
+                        But now you’re just a dusty app,<br>
+                        It's time to give that “Delete” a tap.</p>
+
+                        <p>No hard feelings, no sad goodbye,<br>
+                        You’re off to the recycle bin in the sky,<br>
+                        We’ll find something new, something slick,<br>
+                        So long, old friend, you were just a click!</p>
+                    </div>
+                <hr>
+                <br>
+            </div>
+
+            <div class="form__action">
+              <a class="btn btn--dark" href="{% url 'services' %}">Cancel</a>
+              <button class="btn btn--main" type="submit" value="Confirm">Submit</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+{% include 'newborn/footer.html' %}
+
+{% endblock %}

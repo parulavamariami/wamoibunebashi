@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+
+{% block title %} <title>closer</title>{% endblock %}
+
+{% block content %}
+
+{% include 'newborn/heading.html' %}
+
+<style>
+
+    .inside-container {
+        display: flex;
+        margin-left: 15%;
+    }
+
+    .image-container {
+        flex: 1;
+        margin-left: 5%;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+        display: flex;
+        border-radius: 8px;
+    }
+
+    .text-container {
+        flex: 1;
+        max-width: 60%;
+        margin-right: 10%;
+    }
+
+    .price {
+        font-size: 2.5em;
+        color: #962726;
+        margin: 5px 0;
+    }
+
+    .description {
+        font-size: 1.5em;
+        color: #131417;
+    }
+
+</style>
+
+
+<section class="section" id="testmonial">
+    <div class="inside-container">
+        <div class="image-container">
+                <embed src="{{ service.picture.url }}" width="80%" />
+        </div>
+        <div class="text-container">
+            <div class="price">
+                <h2>{{ service.price }} GEL</h2>
+            </div>
+            <div class="description">
+                <hr>
+                <p>{{ service.description }}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br><br><br><br>
+
+    <div class="container">
+        <h6 class="section-title mb-0">Comment Section</h6>
+        {% if request.user.is_authenticated %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input name="body" class="form-control" id="exampleFormControlTextarea1" placeholder="Tell us about you experience">
+            </div>
+        </form>
+        {% endif %}
+        <br>
+        {% for comment in comments %}
+            <a href="{% url 'profile' comment.user.id %}">
+                <img src="{{ comment.user.avatar.url }} " width="50px" height="50px" style="border-radius: 50%; margin: 1%">
+                 @{{ comment.user.username }}</a> <span>{{ comment.created | timesince }}</span>
+            {% if comment.user == request.user %}
+                <a href="{% url 'delete_comment' comment.id %}" style="margin-left: 80%;">Delete</a>
+            {% endif %}
+            <div style="margin-left: 7.5%;">
+                {{ comment.body }}
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% include 'newborn/footer.html' %}
+
+{% endblock %}

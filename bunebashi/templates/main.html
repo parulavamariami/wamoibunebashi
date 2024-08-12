@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Parulava">
+
+    {% block title %}{% endblock %}
+
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="icon" href="https://png.pngtree.com/png-vector/20220703/ourmid/pngtree-agriculture-wheat-vector-icon-design-png-image_5559413.png">
+
+</head>
+    <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    {% include 'navbar.html' %}
+
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            {% endfor %}
+    {% endif %}
+
+    {% block content %}
+
+    <br>
+    <hr>
+
+    {% endblock %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+    </body>
+</html>

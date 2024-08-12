@@ -1,0 +1,159 @@
+{% extends 'main.html' %}
+
+{% block title %} <title>Add Service</title>{% endblock %}
+
+{% block content %}
+
+{% include 'newborn/heading.html' %}
+<style>
+    .inputer{
+        margin-left: 15%;
+        }
+
+    .form__group {
+        margin-bottom: 5px;
+        }
+    .form__group input[type="text"],
+    .form__group textarea,
+    .form__group select {
+        width: 45%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px; /* Rounded corners */
+        box-sizing: border-box;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+
+
+    /* Add some spacing between form elements */
+    .form__group label {
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+    /* Style the submit button */
+    button[type="submit"] {
+        background-color: #bd8f13;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Button hover effect */
+    button[type="submit"]:hover {
+        background-color: #b58b3c;
+    }
+    /* Style for number input fields */
+    input[type="number"] {
+        width: 100px; /* Set a specific width */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px; /* Rounded corners */
+        font-size: 14px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+    /* Style for the description textarea */
+    textarea {
+        width: 200px; /* Adjust width */
+        height: 80px; /* Adjust height */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px; /* Rounded corners */
+        font-size: 14px;
+        box-sizing: border-box;
+        resize: vertical; /* Allow vertical resizing */
+        margin-top: 5px;
+    }
+    /* Basic styling for file input fields */
+    input[type="file"] {
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        color: white; /* Text color */
+        font-size: 14px;
+    }
+
+    input[type="file"]::file-selector-button {
+        background-color: #212530; /* Button color */
+        border: none;
+        padding: 6px 12px;
+        border-radius: 5px; /* Rounded corners for the button */
+        cursor: pointer;
+        color: white; /* Button text color */
+    }
+
+    input[type="file"]::file-selector-button:hover {
+        background-color: #e67e22; /* Hover color */
+    }
+</style>
+
+<div class="inputer">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form__group">
+          <label>Upload Cover Picture</label>
+            {{ form.picture }}
+            <hr>
+
+        </div>
+
+        <div class="form__group">
+          <label>Service Title</label>
+          {{ form.title }}
+        </div>
+
+        <div class="form__group">
+                <label for="genres">Type</label>
+                <input required type="text" name="genre" list="type-list" >
+                <datalist id="type-list">
+                    {% for genre in genres %}
+                        <select id='genres'>
+                            <option value="{{ genre.name }}">{{ genre.name }}</option>
+                        </select>
+                    {% endfor %}
+
+                </datalist>
+
+        </div>
+        <div class="form__group">
+                <label for="usernames">Username</label>
+                <input required type="text" name="username" list="user-list" >
+                <datalist id="user-list">
+                    {% for username in usernames %}
+                        <select id='usernames'>
+                            <option value="{{ username.fullname }}">{{ username.fullname }}</option>
+                        </select>
+                    {% endfor %}
+
+                </datalist>
+
+        </div>
+        <div class="form__group">
+            <label>Price</label>
+            {{ form.price }}
+        </div>
+
+        <div class="form__group">
+          <label>Description:</label>
+          {{ form.description }}
+            <hr>
+        </div>
+
+
+        <div class="form__action">
+          <a class="btn btn--dark" href="{% url 'home' %}">Cancel</a>
+          <button class="btn btn--main" type="submit">Create Service</button>
+        </div>
+    </form>
+</div>
+
+{% include 'newborn/footer.html' %}
+
+{% endblock %}

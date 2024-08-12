@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block title %} <title>Service Page</title>{% endblock %}
+
+{% block content %}
+
+{% include 'newborn/heading.html' %}
+
+<section id="portfolio" class="section portfolio-section">
+    <div class="container">
+        <div class="filters">
+            <a href="{{ request.path }}" data-filter=".all" class="active">All</a>
+            {% for genre in genre %}
+            <a href="{{ request.path }}?lookfor={{ genre.name }}">{{ genre }}</a>
+            {% endfor %}
+        </div>
+        {% include 'newborn/service_cards.html' %}
+    </div>
+</section>
+
+{% include 'newborn/footer.html' %}
+
+{% endblock %}

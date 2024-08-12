@@ -1,0 +1,46 @@
+{% load static %}
+<header>
+   <nav class="navbar custom-navbar navbar-expand-md navbar-light fixed-top" data-spy="affix" data-offset-top="10">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="">bunebashi
+            </a>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="{% url 'services' %}" method="get">
+                        <input name="lookfor" type="search" class="form-control form-control-dark" placeholder="Search Services" aria-label="Search">
+                    </form>
+
+                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'about' %}">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'services' %}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'contact' %}">Contact</a></li>
+
+                    {% if request.user.is_authenticated %}
+
+                        <div class="dropdown">
+                            <button class="ml-4 nav-link btn btn-primary btn-sm rounded dropdown-toggle" type="button"
+                                    id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile</button>
+                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'profile' user.id %}">My profile</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'add-service' %}">Add Service</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'update_user' %}">Update Profile</a></li>
+                                <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'logout' %}">Log out</a></li>
+                            </ul>
+                        </div>
+
+                    {% else %}
+
+                        <li class="nav-item"><a class="nav-link" style="color: #6c757d;" href="{% url 'login' %}">Log in</a></li>
+                        <li class="nav-item"><a class="ml-4 nav-link btn btn-primary btn-sm rounded" href="{% url 'signup' %}">Sign up</a></li>
+
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

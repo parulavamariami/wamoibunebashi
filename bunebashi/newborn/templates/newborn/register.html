@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+
+{% block title %} <title>Sign Up</title>{% endblock %}
+
+{% block content %}
+
+{% include 'newborn/heading.html' %}
+
+<style>
+    .centered-form {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 12%;
+        height: 10vh;
+        flex-direction: column;
+        padding: 30px;
+    }
+    .form__group {
+        margin-bottom: 5px;
+    }
+    .form__group input[type="text"],
+    .form__group textarea,
+    .form__group select {
+        width: 65%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px; /* Rounded corners */
+        box-sizing: border-box;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    /* Add some spacing between form elements */
+    .form__group label {
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+    /* Style the submit button */
+    button[type="submit"] {
+        background-color: #fd7e14;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Button hover effect */
+    button[type="submit"]:hover {
+        background-color: #eb4d4b;
+    }
+    /* Style for number input fields */
+    input[type="password"] {
+        width: 65%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px; /* Rounded corners */
+        font-size: 14px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+</style>
+
+<div class="centered-form">
+    <form class="form" action="" method="POST">
+        {% csrf_token %}
+        <div class="form__group">
+            <label for="room_name">Username</label>
+            {{ form.username }}
+            <hr>
+        </div>
+        <div class="form__group">
+            <label for="password">Password</label>
+            {{ form.password1 }}
+            <hr>
+        </div>
+
+        <div class="form__group">
+            <label for="confirm_password">Confirm Password</label>
+            {{ form.password2 }}
+            <hr>
+        </div>
+        <div class="form-check text-start my-3">
+            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">I agree to the terms and conditions as set out by the user agreement.</label>
+        </div>
+        <hr>
+        <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
+
+
+    </form>
+    <div class="auth__action">
+        <br>
+      <p>Already have an account?</p>
+      <a href="{% url 'login' %}" style="font-weight: bold" class="btn btn--link">Log In</a>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
